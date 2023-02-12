@@ -21,6 +21,49 @@ void selectionSort(int *array, int n){
     }
 }
 
+void merge(int* arrayA, int sizeA, int* arrayB, int sizeB, int* arrayC){
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (i<sizeA and j<sizeB){
+        if (arrayA[i] >= arrayB[j]){
+            arrayC[k++] = arrayA[i++];
+        
+        }
+        else{
+            arrayC[k++] = arrayB[j++];
+        }
+        
+        while(i<sizeA){
+            arrayC[k++] = arrayA[i++];
+        }
+
+        while(i<sizeB){
+            arrayC[k++] = arrayB[i++];
+        }
+    }
+}
+
+void mergeSort(int* array, int size){
+    if (size>1){
+        int *arrayA = new int[size/2];
+        for (int i = 0; i<size/2; i++){
+            arrayA[i] = array[i];
+        }
+        int *arrayB = new int[size - (size/2)];
+        for (int j = size/2; j<(size-size/2); j++){
+            arrayB[j] = array[j];
+        }   
+        mergeSort(arrayA, size/2);
+        mergeSort(arrayB, (size-size/2));
+        merge(arrayA, size/2, arrayB, (size-size/2), array);
+        delete[] arrayA;
+        delete[] arrayB;
+    }
+
+}
+
 
 
 int main(){
